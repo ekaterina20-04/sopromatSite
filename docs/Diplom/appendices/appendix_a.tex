@@ -1,0 +1,187 @@
+% ============================================================
+% ПРИЛОЖЕНИЕ А. Листинги ключевых алгоритмов
+% ============================================================
+\newpage
+\section*{ПРИЛОЖЕНИЕ А}
+\addcontentsline{toc}{section}{ПРИЛОЖЕНИЕ А. Листинги ключевых алгоритмов}
+\begin{center}
+  \textbf{Листинги ключевых алгоритмов расчёта}
+\end{center}
+
+\subsection*{А.1. Главный модуль расчёта (calculateBeam.ts)}
+
+\begin{lstlisting}[language=Java,caption={Диспетчер расчёта балки}]
+import type { BeamConfig, BeamResult } from '@entities/beam';
+import { calculateCantilever } from '../lib/cantilever';
+import { calculateSimplySupported } from '../lib/simplySupported';
+import { calculateOverhang } from '../lib/overhang';
+import { verifyResult } from '../lib/verification';
+
+export function calculateBeam(config: BeamConfig): BeamResult {
+  let result: BeamResult;
+  switch (config.type) {
+    case 'cantilever':
+      result = calculateCantilever(config);
+      break;
+    case 'simply-supported':
+      result = calculateSimplySupported(config);
+      break;
+    case 'overhang':
+      result = calculateOverhang(config);
+      break;
+    default:
+      throw new Error(
+        'Unknown beam type: ' + (config as BeamConfig).type
+      );
+  }
+  // Verification by Zhuravsky relations
+  result.verification = verifyResult(config, result);
+  return result;
+}
+\end{lstlisting}
+
+\subsection*{А.2. Расчёт шарнирно-опёртой балки (simplySupported.ts)}
+
+\begin{lstlisting}[language=Java,caption={Вспомогательные функции дискретизации и интегрирования}]
+const N_POINTS = 500;
+
+function linspace(start: number, end: number, n: number): number[] {
+  const arr: number[] = [];
+  const step = (end - start) / (n - 1);
+  for (let i = 0; i < n; i++) arr.push(start + i * step);
+  return arr;
+}
+
+function trapz(y: number[], x: number[]): number[] {
+  const result = new Array<number>(y.length).fill(0);
+  for (let i = 1; i < y.length; i++) {
+    result[i] = result[i - 1]
+      + ((y[i - 1] + y[i]) / 2) * (x[i] - x[i - 1]);
+  }
+  return result;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,caption={Определение реакций опор (фрагмент)}]
+export function calculateSimplySupported(
+  config: BeamConfig
+): BeamResult {
+  const { length: L, loads, material } = config;
+  const EI = material.E * material.I;
+  const xs = linspace(0, L, N_POINTS);
+  let RA = 0, RB = 0;
+
+  for (const load of loads) {
+    if (load.type === 'point') {
+      const F = load.value, a = load.position;
+      const ra = (F * (L - a)) / L;
+      RA += ra;
+      RB += F - ra;
+    } else if (load.type === 'distributed') {
+      const { start, end, w1, w2=w1, distribution } = load;
+      const len = end - start;
+      const totalF = distribution === 'uniform'
+        ? w1 * len : ((w1 + w2) / 2) * len;
+      const centroid = distribution === 'uniform'
+        ? (start + end) / 2
+        : start + len*(w1+2*w2) / (3*(w1+w2+1e-12));
+      const ra = (totalF * (L - centroid)) / L;
+      RA += ra;
+      RB += totalF - ra;
+    } else if (load.type === 'moment') {
+      const M0 = load.value;
+      RB += -M0 / L;
+      RA += M0 / L;
+    }
+  }
+  // ... (calculation continues)
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,caption={Численное интегрирование для деформаций}]
+  // Integration for theta(x) and v(x)
+  // Boundary conditions: v(0)=0, v(L)=0
+  const MoverEI = M_phys.map((m) => m / EI);
+  const thetaRaw = trapz(MoverEI, xs);
+
+  // C1 from condition v(L)=0:
+  // v(x) = integral(theta)dx = vRaw + C1*x
+  const vRaw = trapz(thetaRaw, xs);
+  // v(L)=vRaw[L]+C1*L=0 => C1=-vRaw[L]/L
+  const C1 = -vRaw[N_POINTS - 1] / L;
+
+  const theta = thetaRaw.map((t) => t + C1);
+  const deformedY = vRaw.map((v, i) => v + C1 * xs[i]);
+
+  const maxDeflection = Math.max(
+    ...deformedY.map(Math.abs)
+  );
+\end{lstlisting}
+
+\subsection*{А.3. Верификация по Журавскому (verification.ts)}
+
+\begin{lstlisting}[language=Java,caption={Численная производная и нормированная RMS-ошибка}]
+function numericalDerivative(
+  y: number[], x: number[]
+): number[] {
+  const n = y.length;
+  const dy = new Array<number>(n).fill(0);
+  for (let i = 1; i < n - 1; i++) {
+    dy[i] = (y[i+1] - y[i-1]) / (x[i+1] - x[i-1]);
+  }
+  dy[0] = (y[1] - y[0]) / (x[1] - x[0]);
+  dy[n-1] = (y[n-1]-y[n-2]) / (x[n-1]-x[n-2]);
+  return dy;
+}
+
+function normalizedRMS(
+  actual: number[], reference: number[]
+): number {
+  const n = actual.length;
+  const maxRef = Math.max(...reference.map(Math.abs), 1);
+  let sum = 0;
+  for (let i = 0; i < n; i++) {
+    const diff = actual[i] - reference[i];
+    sum += diff * diff;
+  }
+  return Math.sqrt(sum / n) / maxRef;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,caption={Проверка дифференциальных зависимостей и равновесия}]
+export function verifyResult(
+  config: BeamConfig, result: BeamResult
+): VerificationResult {
+  const { x, M, Q } = result;
+  const TOLERANCE = 0.05; // 5%
+
+  // 1. dM/dx ~ Q
+  const dMdx = numericalDerivative(M, x);
+  const dMdx_rms = normalizedRMS(dMdx, Q);
+  const dMdx_matches_Q = dMdx_rms < TOLERANCE;
+
+  // 2. Extremum M at Q=0
+  const maxAbsM = Math.max(...M.map(Math.abs));
+  const maxMIdx = M.reduce(
+    (b,v,i) => Math.abs(v)>Math.abs(M[b]) ? i : b, 0
+  );
+  const qAtMaxM = Math.abs(Q[maxMIdx]);
+  const maxAbsQ = Math.max(...Q.map(Math.abs), 1);
+  const extremum_M_at_Q_zero =
+    maxAbsM < 1e-6 || (qAtMaxM / maxAbsQ < 0.15);
+
+  // 3. Equilibrium: Sum(F)=0, Sum(M)=0
+  const extF = totalExternalForce(config);
+  const reactF = totalReactionForce(result);
+  const equilibrium_force_residual =
+    Math.abs(reactF - extF);
+
+  return {
+    dMdx_matches_Q,
+    extremum_M_at_Q_zero,
+    equilibrium_force_residual,
+    allPassed: dMdx_matches_Q
+      && extremum_M_at_Q_zero && forceOk && momentOk,
+  };
+}
+\end{lstlisting}

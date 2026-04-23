@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.scaleControl {
+  padding: 0.5rem 0.75rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.scaleLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+.scaleSlider {
+  flex: 1;
+  accent-color: var(--color-def);
+  cursor: pointer;
+}
+
+.scaleValue {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-def);
+  min-width: 3.5rem;
+  text-align: right;
+}

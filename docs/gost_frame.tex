@@ -1,0 +1,289 @@
+% ============================================================
+% ГОСТ 2.104-2006 — Рамка и штампы для текстовых документов
+% Подключается через \input{gost_frame} в преамбуле документа
+% Компилятор: XeLaTeX
+% ============================================================
+
+% ============================================================
+% Данные штампа (РЕДАКТИРУЙТЕ ЗДЕСЬ)
+% ============================================================
+\newcommand{\GostDocDesignation}{ПМиИ.26.xx.yy.ПЗ}           % (2) Обозначение документа
+\newcommand{\GostDocName}{Разработка нейросетевого сервиса для детекции БПЛА и~птиц с~интеграцией в~системы защиты наземных объектов}  % (1) Наименование
+\newcommand{\GostOrganization}{Московский политех, гр.~221-171} % (9) Организация
+\newcommand{\GostDeveloper}{Полх Т. А}                              % Разраб. — фамилия
+\newcommand{\GostChecker}{Лукъянов М. Н.}                            % Пров.
+\newcommand{\GostNormControl}{}                                % Н. контр.
+\newcommand{\GostApprover}{}                                   % Утв.
+\newcommand{\GostLitA}{}                                      % Литера 1
+\newcommand{\GostLitB}{}                                       % Литера 2
+\newcommand{\GostLitC}{}                                       % Литера 3
+\newcommand{\GostMass}{}                                       % Масса
+\newcommand{\GostScale}{}                                      % Масштаб
+\newcommand{\GostSheetTotal}{\pageref{LastPage}}               % Листов
+
+% ============================================================
+% РАМКА — внешний прямоугольник
+% 20мм слева, 5мм сверху/справа/снизу от края страницы
+% ============================================================
+\newcommand{\DrawGostFrame}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \coordinate (FrameBL) at ([xshift=20mm, yshift=5mm] current page.south west);
+    \coordinate (FrameTR) at ([xshift=-5mm, yshift=-5mm] current page.north east);
+    \draw[line width=0.7mm] (FrameBL) rectangle (FrameTR);
+  \end{tikzpicture}%
+}
+
+% ============================================================
+% ФОРМА 2 — основная надпись для текстовых документов
+% (первый или заглавный лист)
+% Размеры: 185 × 40 мм (8 строк по 5 мм)
+% Столбцы: 7|10|23|15|10 | 70 | 15|15|20
+% По ГОСТ 2.104-2006, стр. 9 (Форма 2)
+% ============================================================
+\newcommand{\DrawFormTwo}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    % T0 = левый нижний угол штампа
+    \coordinate (TBL) at ([xshift=-5mm, yshift=5mm] current page.south east);
+    \coordinate (T0) at ([xshift=-185mm] TBL);
+    %
+    % --- Столбцы (x от T0, мм) ---
+    % 0  7  17  40  55  65      135  150  165  185
+    %  7  10  23  15  10   70    15   15   20
+    \def\cA{0}    % левый край
+    \def\cB{7}    % Изм.(7мм)
+    \def\cC{17}   % Лист(10мм)
+    \def\cD{40}   % № докум.(23мм)
+    \def\cE{55}   % Подп.(15мм)
+    \def\cF{65}   % Дата(10мм) → начало обл.(1)
+    \def\cG{135}  % конец обл.(1) → начало правого блока
+    \def\cH{150}  % Лит.(15мм) → Масса
+    \def\cI{165}  % Масса(15мм) → Масштаб
+    \def\cJ{185}  % Масштаб(20мм) → правый край
+    \def\cK{140}     \def\cKa{145} 
+    %
+    % Подразделение Лит. на 3 ячейки по 5мм
+    \def\cL{140}  % 135+5
+    \def\cM{145}  % 135+10
+    %
+    % --- Строки (y от T0, снизу вверх, мм) ---
+    % 0  5  10  15  20  25  30  35  40
+    \def\rA{0}    % низ
+    \def\rB{5}    % Утв.
+    \def\rC{10}   % Н. контр.
+    \def\rD{15}   % Пров.
+    \def\rE{20}   % Разраб.
+    \def\rF{25}   % Изм/Лист/etc + Лит/Масса/Масш заголовки
+    \def\rG{30}
+    \def\rH{35}
+    \def\rI{40}   % верх
+    %
+    % =========================================
+    % ГОРИЗОНТАЛЬНЫЕ ЛИНИИ
+    % =========================================
+    % Основные (полная ширина 0→185)
+    \foreach \yy in {\rA, \rF, \rI} {
+      \draw[line width=0.3mm]
+        ([xshift=\cA mm, yshift=\yy mm] T0) --
+        ([xshift=\cJ mm, yshift=\yy mm] T0);
+    }
+    %
+    % Левый блок (0→65): строки данных
+    \foreach \yy in {\rB, \rC, \rD, \rE, \rG, \rH} {
+      \draw[line width=0.2mm]
+        ([xshift=\cA mm, yshift=\yy mm] T0) --
+        ([xshift=\cF mm, yshift=\yy mm] T0);
+    }
+    %
+    % Правый блок (135→185): разделитель заголовки/значения Лит-Масса-Масш
+    \foreach \yy in {\rE, \rD} {
+    	\draw[line width=0.2mm]
+    	([xshift=\cG mm, yshift=\yy mm] T0) --
+    	([xshift=\cJ mm, yshift=\yy mm] T0);
+    }
+
+
+    % =========================================
+    % ВЕРТИКАЛЬНЫЕ ЛИНИИ
+    % =========================================
+    % Внешние (полная высота)
+    \foreach \xx in {\cA, \cJ} {
+      \draw[line width=0.3mm]
+        ([xshift=\xx mm, yshift=\rA mm] T0) --
+        ([xshift=\xx mm, yshift=\rI mm] T0);
+    }
+    %
+    \foreach \xx in {\cB} {
+    	\draw[line width=0.2mm]
+    	([xshift=\xx mm, yshift=\rF mm] T0) --
+    	([xshift=\xx mm, yshift=\rI mm] T0);
+    }
+    % Левый блок: внутренние (0→25, под заголовком)
+    \foreach \xx in {\cC, \cD, \cE, \cF} {
+      \draw[line width=0.2mm]
+        ([xshift=\xx mm, yshift=\rA mm] T0) --
+        ([xshift=\xx mm, yshift=\rI mm] T0);
+    }
+    %
+    % Центральный разделитель обл.(1) / правый блок (полная высота)
+    \draw[line width=0.2mm]
+      ([xshift=\cG mm, yshift=\rA mm] T0) --
+      ([xshift=\cG mm, yshift=\rF mm] T0);
+    %
+    % Правый блок: Лит/Масса/Масштаб разделители (y=15→25)
+    \foreach \xx in {\cI, \cH, \cJ} {
+      \draw[line width=0.2mm]
+        ([xshift=\xx mm, yshift=\rD mm] T0) --
+        ([xshift=\xx mm, yshift=\rF mm] T0);
+    }
+    %
+    
+     \foreach \xx in {\cK, \cKa} {
+    	\draw[line width=0.2mm]
+    	([xshift=\xx mm, yshift=\rD mm] T0) --
+    	([xshift=\xx mm, yshift=\rE mm] T0);
+    }
+    
+    % =========================================
+    % ТЕКСТ
+    % =========================================
+    \tikzset{
+      lbl/.style={font=\fontsize{7pt}{8pt}\selectfont, inner sep=0pt},
+      lblc/.style={lbl, anchor=center},
+      lbll/.style={lbl, anchor=west},
+      val/.style={font=\fontsize{9pt}{11pt}\selectfont, inner sep=0pt, anchor=center},
+    }
+    %
+    % --- Заголовки столбцов (y=20→25) ---
+    \node[lblc] at ([xshift=3.5mm,  yshift=27.5mm] T0) {Изм.};
+    \node[lblc] at ([xshift=12mm,   yshift=27.5mm] T0) {Лист};
+    \node[lblc] at ([xshift=28.5mm, yshift=27.5mm] T0) {№ докум.};
+    \node[lblc] at ([xshift=47.5mm, yshift=27.5mm] T0) {Подп.};
+    \node[lblc] at ([xshift=60mm,   yshift=27.5mm] T0) {Дата};
+    %
+    % --- Заголовки Лит./Масса/Масштаб (y=20→25) ---
+    \node[lblc] at ([xshift=142.5mm, yshift=22.5mm] T0) {Лит.};
+    \node[lblc] at ([xshift=157.5mm, yshift=22.5mm] T0) {Масса};
+    \node[lblc] at ([xshift=175mm,   yshift=22.5mm] T0) {Масштаб};
+    %
+    % --- Значения Лит. (3 ячейки по 5мм) (y=15→20) ---
+    \node[val] at ([xshift=137.5mm, yshift=17.5mm] T0) {\GostLitA};
+    \node[val] at ([xshift=142.5mm, yshift=17.5mm] T0) {\GostLitB};
+    \node[val] at ([xshift=147.5mm, yshift=17.5mm] T0) {\GostLitC};
+    % Масса / Масштаб значения
+    \node[val] at ([xshift=157.5mm, yshift=17.5mm] T0) {\GostMass};
+    \node[val] at ([xshift=175mm,   yshift=17.5mm] T0) {\GostScale};
+    %
+    % --- Область (9) — организация (y=0→10, x=135→185) ---
+    \node[val, text width=48mm, align=center]
+      at ([xshift=160mm, yshift=7mm] T0) {\GostOrganization};
+    %
+    % --- Роли (y=0→20, x=0→17 объединено) ---
+    \node[lbll] at ([xshift=1mm, yshift=22.5mm] T0) {Разраб.};
+    \node[lbll] at ([xshift=1mm, yshift=17.5mm] T0) {Пров.};
+    \node[lbll] at ([xshift=1mm, yshift=7.5mm]  T0) {Н. контр.};
+    \node[lbll] at ([xshift=1mm, yshift=2.5mm]  T0) {Утв.};
+    %
+    % --- ФИО (x=17→40, col 2 = 23мм) ---
+    \node[val] at ([xshift=28.5mm, yshift=22.5mm] T0) {\GostDeveloper};
+    \node[val] at ([xshift=28.5mm, yshift=17.5mm] T0) {\GostChecker};
+    \node[val] at ([xshift=28.5mm, yshift=7.5mm]  T0) {\GostNormControl};
+    \node[val] at ([xshift=28.5mm, yshift=2.5mm]  T0) {\GostApprover};
+    %
+    % --- Область (2) — обозначение документа (y=25→40, x=65→185) ---
+    \node[font=\fontsize{12pt}{14pt}\selectfont, anchor=center]
+      at ([xshift=125mm, yshift=32.5mm] T0) {\GostDocDesignation};
+    %
+    % --- Область (1) — наименование (y=0→25, x=65→135) ---
+    \node[font=\fontsize{11pt}{13pt}\selectfont, anchor=center,
+          text width=65mm, align=center]
+      at ([xshift=100mm, yshift=12.5mm] T0) {\GostDocName};
+    %
+  \end{tikzpicture}%
+}
+
+% ============================================================
+% ФОРМА 2а — последующие листы
+% Размеры: 185 × 15 мм (3 строки по 5 мм)
+% Столбцы: 7|10|23|15|10 | 110 | 10
+% По ГОСТ 2.104-2006, стр. 10 (Форма 2а)
+% ============================================================
+\newcommand{\DrawFormTwoA}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \coordinate (TBL) at ([xshift=-5mm, yshift=5mm] current page.south east);
+    \coordinate (T0) at ([xshift=-185mm] TBL);
+    %
+    % Столбцы: 7|10|23|15|10|110|10 = 185
+    \def\cA{0}   \def\cB{7}   \def\cC{17}  \def\cD{40}
+    \def\cE{55}  \def\cF{65}  \def\cG{175} \def\cH{185}
+    %
+    % Внешний прямоугольник 185×15
+    \draw[line width=0.3mm]
+      (T0) rectangle ([xshift=185mm, yshift=15mm] T0);
+    %
+    % Горизонтальная линия: отделяет нижнюю строку (5мм) с Изм/Лист/...
+    \draw[line width=0.2mm]
+    
+      ([yshift=5mm] T0) -- ([xshift=\cF mm, yshift=5mm] T0);
+    \draw[line width=0.2mm]
+      
+      ([yshift=10mm] T0) -- ([xshift=\cF mm, yshift=10mm] T0);
+    %
+    % Вертикальные разделители левого блока (0→15мм, полная высота)
+    \foreach \xx in {\cB, \cC, \cD, \cE} {
+      \draw[line width=0.2mm]
+        ([xshift=\xx mm] T0) -- ([xshift=\xx mm, yshift=15mm] T0);
+    }
+    %
+    % Вертикальные разделители (полная высота 0→15мм)
+    \foreach \xx in {\cF, \cG} {
+      \draw[line width=0.2mm]
+        ([xshift=\xx mm] T0) -- ([xshift=\xx mm, yshift=15mm] T0);
+    }
+    %
+    % Текст
+    \tikzset{
+      lbl/.style={font=\fontsize{7pt}{8pt}\selectfont, inner sep=0pt, anchor=center},
+    }
+    \node[lbl] at ([xshift=3.5mm,  yshift=2.5mm] T0) {Изм.};
+    \node[lbl] at ([xshift=12mm,   yshift=2.5mm] T0) {Лист};
+    \node[lbl] at ([xshift=28.5mm, yshift=2.5mm] T0) {№ докум.};
+    \node[lbl] at ([xshift=47.5mm, yshift=2.5mm] T0) {Подп.};
+    \node[lbl] at ([xshift=60mm,   yshift=2.5mm] T0) {Дата};
+    %
+    % Область (2) — обозначение (x=65→175, y=0→15)
+    \node[font=\fontsize{10pt}{12pt}\selectfont, anchor=center]
+      at ([xshift=120mm, yshift=7.5mm] T0) {\GostDocDesignation};
+    %
+    % Горизонтальная линия в блоке «Лист» (отделяет надпись от номера)
+    \draw[line width=0.2mm]
+      ([xshift=175mm, yshift=8mm] T0) -- ([xshift=185mm, yshift=8mm] T0);
+    %
+    % Лист (номер страницы, x=175→185)
+    \node[lbl] at ([xshift=180mm, yshift=11.5mm] T0) {Лист};
+    \node[font=\fontsize{10pt}{12pt}\selectfont, anchor=center]
+      at ([xshift=180mm, yshift=4mm] T0) {\thepage};
+    %
+  \end{tikzpicture}%
+}
+
+% ============================================================
+% Стили страниц
+% ============================================================
+\fancypagestyle{gostfirst}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyhead[C]{\DrawGostFrame}%
+  \fancyfoot[C]{\DrawFormTwo}%
+}
+
+\fancypagestyle{gostplain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyhead[C]{\DrawGostFrame}%
+  \fancyfoot[C]{\DrawFormTwoA}%
+}
+
+% Последующие страницы — Форма 2а
+\pagestyle{gostplain}

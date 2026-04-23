@@ -1,0 +1,221 @@
+% ============================================================
+% Дипломная работа (ВКР)
+% Тема: Разработка интерактивной обучающей веб-платформы
+%       по основам сопротивления материалов
+% Компилятор: XeLaTeX
+% ============================================================
+\documentclass[a4paper,14pt,fleqn]{extarticle}
+
+% ============================================================
+% Кодировка и шрифт
+% ============================================================
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setmonofont{Courier New}
+
+% ============================================================
+% Русский язык
+% ============================================================
+\usepackage[english,russian]{babel}
+
+% ============================================================
+% Геометрия страницы (ГОСТ 2.104-2006)
+% Рамка: 20мм слева, 5мм справа/сверху/снизу от края страницы.
+% Штамп снизу: 15мм (Форма 2а) или 40мм (Форма 2).
+% Текст должен иметь отступ от всех линий рамки и штампа.
+% ============================================================
+\usepackage[
+  a4paper,
+  left=30mm,
+  right=15mm,
+  top=20mm,
+  bottom=30mm,
+  headheight=17pt,
+  headsep=6mm,
+  footskip=18mm
+]{geometry}
+
+% Мягкий перенос: предотвращаем overfull hbox на длинных словах
+\emergencystretch=2em
+\tolerance=1000
+\hbadness=10000
+\hyphenpenalty=50
+
+% ============================================================
+% Математика
+% ============================================================
+\usepackage{amsmath,amssymb,amsfonts}
+
+% ============================================================
+% Графика и цвета
+% ============================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{float}
+
+% ============================================================
+% Таблицы
+% ============================================================
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+% ============================================================
+% Списки и перечисления
+% ============================================================
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=\parindent}
+
+% ============================================================
+% Колонтитулы
+% ============================================================
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% ============================================================
+% Оглавление и ссылки
+% ============================================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=false,
+  pdfborder={0 0 0},
+  unicode=true,
+  pdfauthor={Водопьянова Е.В.},
+  pdftitle={Разработка интерактивной обучающей веб-платформы по основам сопротивления материалов}
+}
+\usepackage[nottoc]{tocbibind}
+
+% ============================================================
+% Листинги кода
+% ============================================================
+\usepackage{listings}
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  tabsize=2,
+  inputencoding=utf8,
+  extendedchars=true,
+  literate={а}{{\cyra}}1 {б}{{\cyrb}}1 {в}{{\cyrv}}1 {г}{{\cyrg}}1
+           {д}{{\cyrd}}1 {е}{{\cyre}}1 {ж}{{\cyrzh}}1 {з}{{\cyrz}}1
+           {и}{{\cyri}}1 {й}{{\cyrishrt}}1 {к}{{\cyrk}}1 {л}{{\cyrl}}1
+           {м}{{\cyrm}}1 {н}{{\cyrn}}1 {о}{{\cyro}}1 {п}{{\cyrp}}1
+           {р}{{\cyrr}}1 {с}{{\cyrs}}1 {т}{{\cyrt}}1 {у}{{\cyru}}1
+           {ф}{{\cyrf}}1 {х}{{\cyrh}}1 {ц}{{\cyrc}}1 {ч}{{\cyrch}}1
+           {ш}{{\cyrsh}}1 {щ}{{\cyrshch}}1 {ъ}{{\cyrhrdsn}}1 {ы}{{\cyry}}1
+           {ь}{{\cyrsftsn}}1 {э}{{\cyrerev}}1 {ю}{{\cyryu}}1 {я}{{\cyrya}}1
+}
+
+% ============================================================
+% Подключение ГОСТ-шаблонов
+% ============================================================
+\input{gost_formulas}
+\input{gost_frame}
+
+% ============================================================
+% Настройка абзацного отступа и интервала
+% ============================================================
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\linespread{1.5}
+
+% ============================================================
+% Настройка заголовков разделов
+% ============================================================
+\usepackage{titlesec}
+
+% Разделы — прописные, по центру, жирный
+\titleformat{\section}
+  {\normalfont\fontsize{14pt}{16pt}\selectfont\bfseries\centering\MakeUppercase}
+  {\thesection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{2em}{1em}
+
+% Подразделы — с абзаца, жирный
+\titleformat{\subsection}
+  {\normalfont\fontsize{14pt}{16pt}\selectfont\bfseries}
+  {\thesubsection.}{0.5em}{}
+\titlespacing*{\subsection}{\parindent}{1.5em}{0.8em}
+
+% Пункты — с абзаца, жирный
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{14pt}{16pt}\selectfont\bfseries}
+  {\thesubsubsection.}{0.5em}{}
+\titlespacing*{\subsubsection}{\parindent}{1em}{0.5em}
+
+% ============================================================
+% Нумерация формул в пределах раздела
+% ============================================================
+\numberwithin{equation}{section}
+
+% ============================================================
+% Подписи к рисункам и таблицам
+% ============================================================
+\usepackage{caption}
+\captionsetup[figure]{
+  name=Рис.,
+  labelsep=period,
+  justification=centering,
+  font={small,singlespacing},
+  skip=5pt
+}
+\captionsetup[table]{
+  name=Таблица,
+  labelsep=period,
+  justification=raggedright,
+  singlelinecheck=false,
+  font={small,singlespacing},
+  skip=5pt
+}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% ============================================================
+% Переименования
+% ============================================================
+\addto\captionsrussian{%
+  \renewcommand{\contentsname}{СОДЕРЖАНИЕ}%
+  \renewcommand{\refname}{СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ}%
+}
+
+% ============================================================
+% Начало документа
+% ============================================================
+\begin{document}
+
+% ------ Титульный лист ------
+\input{chapters/titlepage}
+
+% ------ Задание на ВКР ------
+\input{chapters/task}
+
+% ------ Аннотация (с большой рамкой Форма 2) ------
+\input{chapters/abstract}
+
+% ------ Содержание ------
+\tableofcontents
+\newpage
+
+% ------ Основные главы ------
+\input{chapters/introduction}
+
+\input{chapters/ch1_object}
+\input{chapters/ch2_cases}
+\input{chapters/ch3_scheme}
+\input{chapters/ch4_problem}
+\input{chapters/ch5_method}
+\input{chapters/ch6_results}
+
+\input{chapters/conclusion}
+
+% ------ Список литературы ------
+\input{chapters/references}
+
+% ------ Приложения ------
+% Приложение А (листинги кода) добавляется автором отдельно.
+\input{appendices/appendix_b}
+
+\end{document}

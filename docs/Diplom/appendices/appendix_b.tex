@@ -1,0 +1,62 @@
+% ============================================================
+% ПРИЛОЖЕНИЕ А. Структура каталогов проекта
+% ============================================================
+\newpage
+\section*{ПРИЛОЖЕНИЕ А}
+\addcontentsline{toc}{section}{ПРИЛОЖЕНИЕ А. Структура каталогов проекта}
+\begin{center}
+  \textbf{Структура каталогов проекта SopromatLab}
+\end{center}
+
+\vspace{1em}
+
+Кодовая база платформы организована по методологии Feature-Sliced Design. Ниже приведена полная структура каталогов с указанием назначения ключевых файлов.
+
+\vspace{1em}
+
+\begin{lstlisting}[basicstyle=\small\ttfamily, frame=none, numbers=none]
+src/
+|-- app/                    # Application shell
+|   |-- App.tsx             # Root component + routing
+|   |-- providers.tsx       # Chakra UI + Error Boundary
+|   |-- global.css          # Global styles
+|
+|-- pages/
+|   |-- calculator/         # Main calculator page
+|   |-- theory/             # Educational theory (9 sections)
+|   |-- scenarios/          # Pre-built examples (5 tasks)
+|   |-- trainer/            # Random task generator
+|
+|-- features/
+|   |-- calculation/
+|   |   |-- model/
+|   |   |   |-- calculateBeam.ts    # Dispatcher
+|   |   |-- lib/
+|   |       |-- cantilever.ts       # Cantilever solver
+|   |       |-- simplySupported.ts  # Simply-supported solver
+|   |       |-- overhang.ts         # Overhang solver
+|   |       |-- verification.ts     # Zhuravsky verification
+|   |-- tooltips/                   # 21 contextual hints
+|
+|-- entities/
+|   |-- beam/
+|       |-- model/
+|           |-- types.ts            # Domain types
+|
+|-- widgets/
+|   |-- BeamEditor/         # Input panel
+|   |-- DiagramViewer/      # Output visualization
+|   |-- DiagramChart.tsx    # SVG diagram renderer
+|   |-- BeamScheme.tsx      # Beam scheme drawing
+|   |-- StepByStep/         # Step-by-step solution
+|   |-- ExportPanel/        # PDF export + Share URL
+|
+|-- shared/
+|   |-- config/
+|   |   |-- materials.ts    # Steel, Aluminum, Wood
+|   |-- lib/
+|       |-- shareUrl.ts     # Base64 encode/decode
+|       |-- exportPdf.ts    # html2canvas + jsPDF
+|
+|-- main.tsx                # React entry point
+\end{lstlisting}

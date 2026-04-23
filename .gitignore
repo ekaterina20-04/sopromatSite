@@ -1,0 +1,4 @@
+.vscode/
+.VSCodeCounter/
+.claude/
+backend/node_modules/
