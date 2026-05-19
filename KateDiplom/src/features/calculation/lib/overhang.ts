@@ -3,6 +3,7 @@
  * Опора A (x=0), опора B (x=L), вылет [L, L+c].
  */
 import type { BeamConfig, BeamResult, PointLoad, DistributedLoad, MomentLoad } from '@entities/beam';
+import { BASE_FLEXURAL_RIGIDITY } from './constants';
 
 const N_POINTS = 500;
 
@@ -22,8 +23,8 @@ function trapz(y: number[], x: number[]): number[] {
 }
 
 export function calculateOverhang(config: BeamConfig): BeamResult {
-  const { length: L, overhang: c = 0, loads, material } = config;
-  const EI = material.E * material.I;
+  const { length: L, overhang: c = 0, loads } = config;
+  const D = BASE_FLEXURAL_RIGIDITY;
   const totalLength = L + c;
   const xs = linspace(0, totalLength, N_POINTS);
 
@@ -144,8 +145,8 @@ export function calculateOverhang(config: BeamConfig): BeamResult {
   }
 
   // Интегрирование
-  const MoverEI = M_phys.map((m) => m / EI);
-  const thetaRaw = trapz(MoverEI, xs);
+  const MoverD = M_phys.map((m) => m / D);
+  const thetaRaw = trapz(MoverD, xs);
   const vRaw = trapz(thetaRaw, xs);
 
   // Условие: v(0) = 0 (уже), v(L) = 0

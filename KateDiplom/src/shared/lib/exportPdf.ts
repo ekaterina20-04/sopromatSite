@@ -1,6 +1,6 @@
 /**
  * Экспорт эпюр в PDF формата A4 альбомная ориентация.
- * Включает: эпюры, таблицу характерных значений, результат верификации.
+ * Включает: эпюры и таблицу характерных значений.
  */
 import type { BeamConfig, BeamResult } from '@entities/beam';
 
@@ -78,7 +78,7 @@ export async function exportDiagramsToPDF(
     const maxQIdx = result.Q.reduce((b, v, i) => (Math.abs(v) > Math.abs(result.Q[b]) ? i : b), 0);
 
     const rows = [
-      [`Tip: ${config.type}`, `L = ${config.length} m`, `E = ${fmt(config.material.E, 'Pa')}`, `I = ${config.material.I.toExponential(3)} m^4`],
+      [`Tip: ${config.type}`, `L = ${config.length} m`],
       [`Q_max = ${fmt(result.Q[maxQIdx], 'N')} pri x=${result.x[maxQIdx].toFixed(2)} m`, `M_max = ${fmt(result.M[maxMIdx], 'N*m')} pri x=${result.x[maxMIdx].toFixed(2)} m`, `v_max = ${(result.maxDeflection * 1000).toFixed(4)} mm`, ``],
     ];
 
@@ -95,19 +95,6 @@ export async function exportDiagramsToPDF(
       yOffset += 4.5;
     }
 
-    // Верификация
-    if (result.verification) {
-      yOffset += 3;
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(`Verifikatsiya (Zhuravskiy): ${result.verification.allPassed ? 'OK' : 'WARN'}`, 10, yOffset);
-      yOffset += 5;
-      pdf.setFont('helvetica', 'normal');
-      pdf.text(`dM/dx = Q: RMS ${(result.verification.dMdx_rms_error * 100).toFixed(1)}%`, 10, yOffset);
-      yOffset += 4;
-      pdf.text(`SumF residual: ${result.verification.equilibrium_force_residual.toFixed(4)} N`, 10, yOffset);
-      yOffset += 4;
-      pdf.text(`SumM residual: ${result.verification.equilibrium_moment_residual.toFixed(4)} N*m`, 10, yOffset);
-    }
   }
 
   pdf.save(`sopromat-report-${Date.now()}.pdf`);

@@ -36,7 +36,7 @@ function generateSteps(config: BeamConfig, result: BeamResult): Step[] {
   };
   steps.push({
     title: 'Расчётная схема',
-    body: `Тип: ${typeNames[type]}.\nДлина: L = ${L} м.\nМатериал: E = ${fmt(config.material.E, 'Па')}, I = ${config.material.I.toExponential(3)} м⁴.\nЖёсткость: EI = ${fmt(config.material.E * config.material.I, 'Н·м²')}.`,
+    body: `Тип: ${typeNames[type]}.\nДлина: L = ${L} м.`,
   });
 
   // Шаг 2: Внешние нагрузки
@@ -141,7 +141,7 @@ function generateSteps(config: BeamConfig, result: BeamResult): Step[] {
   steps.push({
     title: 'Прогибы и углы поворота',
     body: [
-      `Дифференциальное уравнение: EI·v″(x) = M(x).`,
+      `Дифференциальное уравнение: D·v″(x) = M(x), где D — базовая расчётная жёсткость модели.`,
       `Двойное интегрирование методом трапеций (500 точек).`,
       type === 'cantilever'
         ? `Граничные условия: v(0) = 0, θ(0) = 0 (заделка).`

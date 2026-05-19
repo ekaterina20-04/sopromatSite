@@ -43,7 +43,7 @@ export function ReactionsPanel({ result }: Props) {
           </Tooltip>
         ))}
         <Tooltip
-          label="Максимальный прогиб балки под действием нагрузок. Зависит от жёсткости EI и вида нагрузки."
+          label="Максимальный прогиб балки под действием нагрузок. Зависит от расчётной схемы и вида нагрузки."
           hasArrow
           placement="top"
         >

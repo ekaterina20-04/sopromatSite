@@ -9,6 +9,7 @@ import type {
   DistributedLoad,
   MomentLoad,
 } from '@entities/beam';
+import { BASE_FLEXURAL_RIGIDITY } from './constants';
 
 const N_POINTS = 500;
 
@@ -41,8 +42,8 @@ function trapz(y: number[], x: number[]): number[] {
  *   создаёт CCW момент → M отрицательный.
  */
 export function calculateCantilever(config: BeamConfig): BeamResult {
-  const { length: L, loads, material } = config;
-  const EI = material.E * material.I;
+  const { length: L, loads } = config;
+  const D = BASE_FLEXURAL_RIGIDITY;
   const xs = linspace(0, L, N_POINTS);
 
   const Q      = new Array<number>(N_POINTS).fill(0);
@@ -174,19 +175,19 @@ export function calculateCantilever(config: BeamConfig): BeamResult {
   }
 
   // Интегрирование для θ(x) и v(x)
-  // EI * d²v/dx² = M(x)
-  // EI * θ(x) = EI * dv/dx = ∫M(x)dx + C1
-  // EI * v(x) = ∫∫M(x)dx + C1*x + C2
+  // D * d²v/dx² = M(x)
+  // D * θ(x) = ∫M(x)dx + C1
+  // D * v(x) = ∫∫M(x)dx + C1*x + C2
   // Граничные условия: v(0) = 0, θ(0) = 0 => C1 = 0, C2 = 0
 
   // Деформация считается из физического M (оригинальный знак),
   // чтобы прогиб не менял направление при инвертированном M_display
-  const MoverEI = M_phys.map((m) => m / EI);
-  const thetaEI = trapz(MoverEI, xs);
+  const MoverD = M_phys.map((m) => m / D);
+  const thetaD = trapz(MoverD, xs);
   // theta(0) = 0 — уже выполнено (начинаем с 0)
-  const theta = thetaEI; // рад
+  const theta = thetaD; // рад
 
-  const deformedY = trapz(thetaEI, xs);
+  const deformedY = trapz(thetaD, xs);
   // v(0) = 0 — уже выполнено
 
   const maxDeflection = Math.max(...deformedY.map(Math.abs));

@@ -51,7 +51,6 @@ export function BeamEditor({ config, onChange }: Props) {
         }
       />
       <GeometryPanel config={config} onChange={patch} />
-      {/* <MaterialSelector value={config.material} onChange={(material) => patch({ material })} /> */}
       <LoadForm
         loads={config.loads}
         maxPosition={maxPosition}

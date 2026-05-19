@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import type { Scenario } from '@entities/beam';
-import { MATERIALS } from '@shared/config';
 import { generateShareUrl } from '@shared/lib';
 import styles from './Scenarios.module.css';
 
@@ -14,7 +13,6 @@ const SCENARIOS: Scenario[] = [
     config: {
       type: 'simply-supported',
       length: 12,
-      material: { ...MATERIALS.steel, I: 3.55e-4 },
       loads: [
         { id: 'b1', type: 'point', value: 60000, position: 3, direction: 'vertical' },
         { id: 'b2', type: 'point', value: 120000, position: 7, direction: 'vertical' },
@@ -25,12 +23,11 @@ const SCENARIOS: Scenario[] = [
     id: 'landing-gear',
     title: 'Шасси самолёта',
     description:
-      'Консольная балка стойки шасси длиной 1.2 м из стали с сосредоточенной нагрузкой от колеса 80 кН. Оцениваем максимальный момент и прогиб при посадке.',
+      'Консольная балка стойки шасси длиной 1.2 м с сосредоточенной нагрузкой от колеса 80 кН. Оцениваем максимальный момент и прогиб при посадке.',
     image: '✈️',
     config: {
       type: 'cantilever',
       length: 1.2,
-      material: { ...MATERIALS.steel, I: 1.2e-5 },
       loads: [{ id: 'lg1', type: 'point', value: 80000, position: 1.2, direction: 'vertical' }],
     },
   },
@@ -44,7 +41,6 @@ const SCENARIOS: Scenario[] = [
       type: 'overhang',
       length: 6,
       overhang: 1,
-      material: { ...MATERIALS.steel, I: 2.4e-5 },
       loads: [{ id: 'r1', type: 'point', value: 100000, position: 3, direction: 'vertical' }],
     },
   },
@@ -57,7 +53,6 @@ const SCENARIOS: Scenario[] = [
     config: {
       type: 'simply-supported',
       length: 1.8,
-      material: { ...MATERIALS.steel, I: 4.5e-6 },
       loads: [
         { id: 'w1', type: 'point', value: 50000, position: 0.35, direction: 'vertical' },
         { id: 'w2', type: 'point', value: 50000, position: 1.45, direction: 'vertical' },

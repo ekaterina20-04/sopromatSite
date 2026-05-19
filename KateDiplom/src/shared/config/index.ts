@@ -1,1 +1,1 @@
-export { MATERIALS, MATERIAL_LABELS, BEAM_TYPE_LABELS } from './materials';
+export { BEAM_TYPE_LABELS } from './beamTypes';

@@ -4,9 +4,7 @@ export type {
   DistributedLoad,
   MomentLoad,
   Load,
-  Material,
   BeamConfig,
   BeamResult,
-  VerificationResult,
   Scenario,
 } from './model/types';

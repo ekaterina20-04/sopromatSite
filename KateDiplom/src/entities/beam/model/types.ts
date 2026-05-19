@@ -39,15 +39,6 @@ export interface MomentLoad {
 
 export type Load = PointLoad | DistributedLoad | MomentLoad;
 
-/** Материал балки */
-export interface Material {
-  name: 'steel' | 'aluminum' | 'wood' | 'custom';
-  /** Модуль упругости (Па) */
-  E: number;
-  /** Момент инерции сечения (м⁴) */
-  I: number;
-}
-
 /** Конфигурация балки */
 export interface BeamConfig {
   type: BeamType;
@@ -56,25 +47,6 @@ export interface BeamConfig {
   /** Длина вылета c (м) — для overhang */
   overhang?: number;
   loads: Load[];
-  material: Material;
-}
-
-/** Результат верификации по Журавскому */
-export interface VerificationResult {
-  /** dM/dx ≈ Q — проверка пройдена */
-  dMdx_matches_Q: boolean;
-  /** dQ/dx ≈ -q — проверка пройдена */
-  dQdx_matches_q: boolean;
-  /** Экстремум M при Q=0 */
-  extremum_M_at_Q_zero: boolean;
-  /** Невязка ΣF (должна быть ≈ 0) */
-  equilibrium_force_residual: number;
-  /** Невязка ΣM (должна быть ≈ 0) */
-  equilibrium_moment_residual: number;
-  /** Среднеквадратичная ошибка dM/dx vs Q */
-  dMdx_rms_error: number;
-  /** Все проверки пройдены */
-  allPassed: boolean;
 }
 
 /** Результаты расчёта */
@@ -97,8 +69,6 @@ export interface BeamResult {
   maxDeflection: number;
   /** Координата максимального прогиба */
   maxDeflectionPosition: number;
-  /** Результат верификации по Журавскому */
-  verification?: VerificationResult;
 }
 
 /** Готовый сценарий */

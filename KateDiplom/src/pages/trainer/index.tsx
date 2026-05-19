@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { BeamConfig, PointLoad, DistributedLoad } from '@entities/beam';
 import { calculateBeam } from '@features/calculation';
-import { MATERIALS } from '@shared/config';
 import styles from './Trainer.module.css';
 
 /* ─── Генератор случайных задач ─────────────────────────────────────────── */
@@ -28,9 +27,6 @@ function generateTask(): TrainerTask {
   const types = ['simply-supported', 'cantilever'] as const;
   const type = types[Math.floor(Math.random() * types.length)];
   const L = rand(3, 8);
-
-  const materialKeys = ['steel', 'aluminum', 'wood'] as const;
-  const mat = MATERIALS[materialKeys[Math.floor(Math.random() * materialKeys.length)]];
 
   // Генерируем 1–2 нагрузки
   const numLoads = Math.random() > 0.5 ? 2 : 1;
@@ -72,7 +68,6 @@ function generateTask(): TrainerTask {
     type,
     length: L,
     loads,
-    material: { ...mat },
   };
 
   const result = calculateBeam(config);
@@ -179,8 +174,6 @@ export default function TrainerPage() {
         <p className={styles.taskDesc}>{task.description}</p>
         <div className={styles.taskParams}>
           <span className={styles.param}>L = {task.config.length} м</span>
-          <span className={styles.param}>E = {fmt(task.config.material.E, 'Па')}</span>
-          <span className={styles.param}>I = {task.config.material.I.toExponential(3)} м⁴</span>
         </div>
 
         <p className={styles.taskDesc}>Определите:</p>

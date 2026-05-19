@@ -2,7 +2,6 @@ import type { BeamConfig, BeamResult } from '@entities/beam';
 import { BeamScheme } from './ui/BeamScheme';
 import { DiagramChart } from './ui/DiagramChart';
 import { ReactionsPanel } from './ui/ReactionsPanel';
-import { VerificationPanel } from './ui/VerificationPanel';
 import { StepByStep } from '@widgets/StepByStep';
 import styles from './DiagramViewer.module.css';
 
@@ -18,7 +17,6 @@ export function DiagramViewer({ config, result }: Props) {
     <div className={styles.container} id="diagram-export-container">
       <ReactionsPanel result={result} />
       <StepByStep config={config} result={result} />
-      {result.verification && <VerificationPanel verification={result.verification} />}
       <BeamScheme config={config} result={result} />
 
       <DiagramChart
@@ -27,8 +25,6 @@ export function DiagramViewer({ config, result }: Props) {
         label="Эпюра изгибающих моментов M(x)"
         color="var(--color-m)"
         unit="Н·м"
-        sectionI={config.material.I}
-        sectionH={Math.pow(12 * config.material.I, 1 / 3)}
         loads={config.loads}
       />
       <DiagramChart
@@ -37,8 +33,6 @@ export function DiagramViewer({ config, result }: Props) {
         label="Эпюра поперечных сил Q(x)"
         color="var(--color-q)"
         unit="Н"
-        sectionI={config.material.I}
-        sectionH={Math.pow(12 * config.material.I, 1 / 3)}
         loads={config.loads}
       />
       {hasN && (
@@ -48,8 +42,6 @@ export function DiagramViewer({ config, result }: Props) {
           label="Эпюра продольных сил N(x)"
           color="var(--color-n)"
           unit="Н"
-          sectionI={config.material.I}
-          sectionH={Math.pow(12 * config.material.I, 1 / 3)}
           loads={config.loads}
         />
       )}

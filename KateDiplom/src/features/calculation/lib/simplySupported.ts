@@ -3,6 +3,7 @@
  * Левая опора A (x=0), правая опора B (x=L).
  */
 import type { BeamConfig, BeamResult, PointLoad, DistributedLoad, MomentLoad } from '@entities/beam';
+import { BASE_FLEXURAL_RIGIDITY } from './constants';
 
 const N_POINTS = 500;
 
@@ -22,8 +23,8 @@ function trapz(y: number[], x: number[]): number[] {
 }
 
 export function calculateSimplySupported(config: BeamConfig): BeamResult {
-  const { length: L, loads, material } = config;
-  const EI = material.E * material.I;
+  const { length: L, loads } = config;
+  const D = BASE_FLEXURAL_RIGIDITY;
   const xs = linspace(0, L, N_POINTS);
 
   let RA = 0; // реакция в A
@@ -136,8 +137,8 @@ export function calculateSimplySupported(config: BeamConfig): BeamResult {
 
   // Интегрирование для θ(x) и v(x)
   // Граничные условия: v(0) = 0, v(L) = 0
-  const MoverEI = M_phys.map((m) => m / EI);
-  const thetaRaw = trapz(MoverEI, xs); // C1 = 0 (начальное условие)
+  const MoverD = M_phys.map((m) => m / D);
+  const thetaRaw = trapz(MoverD, xs); // C1 = 0 (начальное условие)
 
   // Находим C1 из условия v(L) = 0
   // v(x) = ∫θ(x)dx = ∫(thetaRaw + C1)dx = vRaw + C1*x

@@ -6,13 +6,6 @@ const BEAM_TYPE_LABELS: Record<string, string> = {
   overhang: 'с вылетом',
 };
 
-const MATERIAL_NAMES: Record<string, string> = {
-  steel: 'Сталь',
-  aluminum: 'Алюминий',
-  wood: 'Дерево',
-  custom: 'Кастомный',
-};
-
 function fmt(n: number, decimals = 2): string {
   return n.toFixed(decimals);
 }
@@ -37,11 +30,6 @@ export function buildBeamContext(config: BeamConfig, result: BeamResult | null):
   lines.push(`Тип: ${BEAM_TYPE_LABELS[config.type] ?? config.type}`);
   lines.push(`Длина: ${fmt(config.length)} м`);
   if (config.overhang) lines.push(`Вылет: ${fmt(config.overhang)} м`);
-
-  const matName = MATERIAL_NAMES[config.material.name] ?? config.material.name;
-  const E_GPa = (config.material.E / 1e9).toFixed(0);
-  const I_cm4 = (config.material.I * 1e8).toFixed(2);
-  lines.push(`Материал: ${matName}, E=${E_GPa} ГПа, I=${I_cm4} см⁴`);
 
   if (config.loads.length > 0) {
     lines.push('');
@@ -89,9 +77,6 @@ export function buildBeamContext(config: BeamConfig, result: BeamResult | null):
     const defl_mm = (result.maxDeflection * 1000).toFixed(3);
     lines.push(`Максимальный прогиб: ${defl_mm} мм @ x=${fmt(result.maxDeflectionPosition)} м`);
 
-    if (result.verification) {
-      lines.push(`Верификация: ${result.verification.allPassed ? 'пройдена' : 'не пройдена'}`);
-    }
   } else {
     lines.push('Расчёт не выполнен или содержит ошибку.');
   }

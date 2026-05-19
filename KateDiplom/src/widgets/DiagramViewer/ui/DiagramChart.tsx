@@ -11,10 +11,6 @@ interface Props {
   label: string;
   color: string;
   unit: string;
-  /** Момент инерции I (м⁴) для расчёта σ = M·y_max/I */
-  sectionI?: number;
-  /** Высота сечения h (м) для расчёта y_max = h/2 */
-  sectionH?: number;
   /** Нагрузки балки для отрисовки границ участков */
   loads?: Load[];
 }
@@ -60,8 +56,6 @@ export function DiagramChart({
   label,
   color,
   unit,
-  sectionI,
-  sectionH,
   loads,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -140,11 +134,6 @@ export function DiagramChart({
             {formatVal(result.Q[hovered.idx], 'Н')}
             {', M = '}
             {formatVal(result.M[hovered.idx], 'Н·м')}
-            {sectionI &&
-              sectionI > 0 &&
-              sectionH &&
-              sectionH > 0 &&
-              `, σ = ${formatVal((Math.abs(result.M[hovered.idx]) * (sectionH / 2)) / sectionI, 'Па')}`}
           </span>
         )}
       </div>

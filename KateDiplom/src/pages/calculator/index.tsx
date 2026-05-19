@@ -6,7 +6,6 @@ import { BeamEditor } from '@widgets/BeamEditor';
 import { ChatAssistant } from '@widgets/ChatAssistant';
 import { DiagramViewer } from '@widgets/DiagramViewer';
 import { ExportPanel } from '@widgets/ExportPanel';
-import { MATERIALS } from '@shared/config';
 import { parseConfigFromUrl } from '@shared/lib';
 import styles from './Calculator.module.css';
 
@@ -22,7 +21,6 @@ const DEFAULT_CONFIG: BeamConfig = {
       direction: 'vertical',
     },
   ],
-  material: { ...MATERIALS.steel },
 };
 
 export default function CalculatorPage() {
