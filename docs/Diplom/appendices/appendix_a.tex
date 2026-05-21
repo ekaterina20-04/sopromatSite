@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % ПРИЛОЖЕНИЕ А. Листинги ключевых алгоритмов
 % ============================================================
 \newpage
@@ -15,7 +15,6 @@ import type { BeamConfig, BeamResult } from '@entities/beam';
 import { calculateCantilever } from '../lib/cantilever';
 import { calculateSimplySupported } from '../lib/simplySupported';
 import { calculateOverhang } from '../lib/overhang';
-import { verifyResult } from '../lib/verification';
 
 export function calculateBeam(config: BeamConfig): BeamResult {
   let result: BeamResult;
@@ -34,8 +33,6 @@ export function calculateBeam(config: BeamConfig): BeamResult {
         'Unknown beam type: ' + (config as BeamConfig).type
       );
   }
-  // Verification by Zhuravsky relations
-  result.verification = verifyResult(config, result);
   return result;
 }
 \end{lstlisting}
@@ -66,8 +63,8 @@ function trapz(y: number[], x: number[]): number[] {
 export function calculateSimplySupported(
   config: BeamConfig
 ): BeamResult {
-  const { length: L, loads, material } = config;
-  const EI = material.E * material.I;
+  const { length: L, loads } = config;
+  const EI = BASE_FLEXURAL_RIGIDITY;
   const xs = linspace(0, L, N_POINTS);
   let RA = 0, RB = 0;
 
@@ -118,70 +115,4 @@ export function calculateSimplySupported(
   );
 \end{lstlisting}
 
-\subsection*{А.3. Верификация по Журавскому (verification.ts)}
 
-\begin{lstlisting}[language=Java,caption={Численная производная и нормированная RMS-ошибка}]
-function numericalDerivative(
-  y: number[], x: number[]
-): number[] {
-  const n = y.length;
-  const dy = new Array<number>(n).fill(0);
-  for (let i = 1; i < n - 1; i++) {
-    dy[i] = (y[i+1] - y[i-1]) / (x[i+1] - x[i-1]);
-  }
-  dy[0] = (y[1] - y[0]) / (x[1] - x[0]);
-  dy[n-1] = (y[n-1]-y[n-2]) / (x[n-1]-x[n-2]);
-  return dy;
-}
-
-function normalizedRMS(
-  actual: number[], reference: number[]
-): number {
-  const n = actual.length;
-  const maxRef = Math.max(...reference.map(Math.abs), 1);
-  let sum = 0;
-  for (let i = 0; i < n; i++) {
-    const diff = actual[i] - reference[i];
-    sum += diff * diff;
-  }
-  return Math.sqrt(sum / n) / maxRef;
-}
-\end{lstlisting}
-
-\begin{lstlisting}[language=Java,caption={Проверка дифференциальных зависимостей и равновесия}]
-export function verifyResult(
-  config: BeamConfig, result: BeamResult
-): VerificationResult {
-  const { x, M, Q } = result;
-  const TOLERANCE = 0.05; // 5%
-
-  // 1. dM/dx ~ Q
-  const dMdx = numericalDerivative(M, x);
-  const dMdx_rms = normalizedRMS(dMdx, Q);
-  const dMdx_matches_Q = dMdx_rms < TOLERANCE;
-
-  // 2. Extremum M at Q=0
-  const maxAbsM = Math.max(...M.map(Math.abs));
-  const maxMIdx = M.reduce(
-    (b,v,i) => Math.abs(v)>Math.abs(M[b]) ? i : b, 0
-  );
-  const qAtMaxM = Math.abs(Q[maxMIdx]);
-  const maxAbsQ = Math.max(...Q.map(Math.abs), 1);
-  const extremum_M_at_Q_zero =
-    maxAbsM < 1e-6 || (qAtMaxM / maxAbsQ < 0.15);
-
-  // 3. Equilibrium: Sum(F)=0, Sum(M)=0
-  const extF = totalExternalForce(config);
-  const reactF = totalReactionForce(result);
-  const equilibrium_force_residual =
-    Math.abs(reactF - extF);
-
-  return {
-    dMdx_matches_Q,
-    extremum_M_at_Q_zero,
-    equilibrium_force_residual,
-    allPassed: dMdx_matches_Q
-      && extremum_M_at_Q_zero && forceOk && momentOk,
-  };
-}
-\end{lstlisting}

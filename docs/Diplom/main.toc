@@ -5,59 +5,57 @@
 \contentsline {subsection}{Обзор опубликованных работ по теме}{9}{section*.1}%
 \contentsline {subsection}{Анализ существующих решений}{12}{section*.1}%
 \contentsline {subsection}{Цель и задачи работы}{14}{table.caption.2}%
-\contentsline {subsection}{Научная новизна}{14}{Item.7}%
-\contentsline {subsection}{Практическая значимость}{16}{Item.11}%
+\contentsline {subsection}{Научная новизна}{14}{Item.6}%
+\contentsline {subsection}{Практическая значимость}{15}{Item.9}%
 \contentsline {section}{\numberline {1}СПЕЦИАЛЬНАЯ ЧАСТЬ}{16}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Объект исследования}{16}{subsection.1.1}%
 \contentsline {subsubsection}{\numberline {1.1.1}Краткий исторический очерк развития дисциплины}{16}{subsubsection.1.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.2}Сопротивление материалов как учебная дисциплина}{18}{subsubsection.1.1.2}%
-\contentsline {subsubsection}{\numberline {1.1.3}Анализ трудностей восприятия}{19}{subsubsection.1.1.3}%
-\contentsline {subsubsection}{\numberline {1.1.4}Обоснование выбора статически определимых систем}{20}{subsubsection.1.1.4}%
-\contentsline {subsubsection}{\numberline {1.1.5}Педагогические предпосылки исследования}{21}{subsubsection.1.1.5}%
-\contentsline {subsection}{\numberline {1.2}Расчётные случаи}{22}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Консольная балка}{23}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}Шарнирно-опёртая балка}{25}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.1.2}Сопротивление материалов как учебная дисциплина}{17}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}Анализ трудностей восприятия}{18}{subsubsection.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.4}Обоснование выбора статически определимых систем}{19}{subsubsection.1.1.4}%
+\contentsline {subsubsection}{\numberline {1.1.5}Педагогические предпосылки исследования}{20}{subsubsection.1.1.5}%
+\contentsline {subsection}{\numberline {1.2}Расчётные случаи}{21}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Консольная балка}{22}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Шарнирно-опёртая балка}{24}{subsubsection.1.2.2}%
 \contentsline {subsubsection}{\numberline {1.2.3}Балка с вылетом}{26}{subsubsection.1.2.3}%
 \contentsline {subsubsection}{\numberline {1.2.4}Типы нагрузок}{28}{subsubsection.1.2.4}%
-\contentsline {subsubsection}{\numberline {1.2.5}Материалы}{29}{subsubsection.1.2.5}%
-\contentsline {subsubsection}{\numberline {1.2.6}Область применимости расчётных случаев}{29}{subsubsection.1.2.6}%
-\contentsline {subsubsection}{\numberline {1.2.7}Сводная характеристика расчётных случаев}{31}{subsubsection.1.2.7}%
-\contentsline {subsection}{\numberline {1.3}Расчётная схема}{32}{subsection.1.3}%
-\contentsline {subsubsection}{\numberline {1.3.1}Идеализация конструкций}{32}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.2.5}Область применимости расчётных случаев}{29}{subsubsection.1.2.5}%
+\contentsline {subsubsection}{\numberline {1.2.6}Сводная характеристика расчётных случаев}{30}{subsubsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.3}Расчётная схема}{31}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Идеализация конструкций}{31}{subsubsection.1.3.1}%
 \contentsline {subsubsection}{\numberline {1.3.2}Схематизация нагрузок}{32}{subsubsection.1.3.2}%
-\contentsline {subsubsection}{\numberline {1.3.3}Граничные условия}{33}{subsubsection.1.3.3}%
+\contentsline {subsubsection}{\numberline {1.3.3}Граничные условия}{32}{subsubsection.1.3.3}%
 \contentsline {subsubsection}{\numberline {1.3.4}Принятые допущения}{33}{subsubsection.1.3.4}%
 \contentsline {subsubsection}{\numberline {1.3.5}Координатные оси и правила знаков}{34}{subsubsection.1.3.5}%
-\contentsline {subsubsection}{\numberline {1.3.6}Вывод формулы нормальных напряжений при изгибе}{35}{subsubsection.1.3.6}%
-\contentsline {subsubsection}{\numberline {1.3.7}Энергетическое обоснование принципа суперпозиции}{37}{subsubsection.1.3.7}%
+\contentsline {subsubsection}{\numberline {1.3.6}Вывод формулы нормальных напряжений при изгибе}{34}{subsubsection.1.3.6}%
+\contentsline {subsubsection}{\numberline {1.3.7}Энергетическое обоснование принципа суперпозиции}{36}{subsubsection.1.3.7}%
 \contentsline {subsection}{\numberline {1.4}Постановка задачи}{37}{subsection.1.4}%
 \contentsline {subsubsection}{\numberline {1.4.1}Математическая модель плоского изгиба балки}{37}{subsubsection.1.4.1}%
-\contentsline {subsubsection}{\numberline {1.4.2}Уравнения равновесия}{41}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.2}Уравнения равновесия}{40}{subsubsection.1.4.2}%
 \contentsline {subsubsection}{\numberline {1.4.3}Метод сечений для построения эпюр}{41}{subsubsection.1.4.3}%
 \contentsline {subsubsection}{\numberline {1.4.4}Определение деформаций}{42}{subsubsection.1.4.4}%
-\contentsline {subsubsection}{\numberline {1.4.5}Формулировка задачи в терминах вычислительной математики}{43}{subsubsection.1.4.5}%
-\contentsline {subsubsection}{\numberline {1.4.6}Обоснование выбранной математической модели}{44}{subsubsection.1.4.6}%
-\contentsline {subsubsection}{\numberline {1.4.7}Классификация задач расчёта балок}{45}{subsubsection.1.4.7}%
-\contentsline {subsection}{\numberline {1.5}Метод решения поставленной задачи}{46}{subsection.1.5}%
-\contentsline {subsubsection}{\numberline {1.5.1}Сравнение альтернативных методов расчёта}{46}{subsubsection.1.5.1}%
-\contentsline {subsubsection}{\numberline {1.5.2}Теория численного интегрирования методом трапеций}{49}{subsubsection.1.5.2}%
-\contentsline {subsubsection}{\numberline {1.5.3}Оценка сходимости алгоритма}{50}{subsubsection.1.5.3}%
-\contentsline {subsubsection}{\numberline {1.5.4}Алгоритм расчёта}{51}{subsubsection.1.5.4}%
-\contentsline {subsubsection}{\numberline {1.5.5}Система верификации результатов}{52}{subsubsection.1.5.5}%
-\contentsline {subsubsection}{\numberline {1.5.6}Архитектура программного решения}{53}{subsubsection.1.5.6}%
-\contentsline {subsubsection}{\numberline {1.5.7}Обоснование выбора технологий}{55}{subsubsection.1.5.7}%
-\contentsline {subsubsection}{\numberline {1.5.8}Визуализация}{57}{subsubsection.1.5.8}%
-\contentsline {subsubsection}{\numberline {1.5.9}Интеграция большой языковой модели (LLM)}{58}{subsubsection.1.5.9}%
-\contentsline {subsection}{\numberline {1.6}Результаты исследования}{61}{subsection.1.6}%
-\contentsline {subsubsection}{\numberline {1.6.1}Реализованная платформа}{61}{subsubsection.1.6.1}%
-\contentsline {subsubsection}{\numberline {1.6.2}Пошаговое решение}{66}{subsubsection.1.6.2}%
-\contentsline {subsubsection}{\numberline {1.6.3}AI-консультант на базе большой языковой модели}{67}{subsubsection.1.6.3}%
-\contentsline {subsubsection}{\numberline {1.6.4}Контекстные подсказки}{69}{subsubsection.1.6.4}%
-\contentsline {subsubsection}{\numberline {1.6.5}Экспорт и обмен}{69}{subsubsection.1.6.5}%
-\contentsline {subsubsection}{\numberline {1.6.6}Подробные верификационные примеры}{70}{subsubsection.1.6.6}%
-\contentsline {subsubsection}{\numberline {1.6.7}Количественная оценка точности}{73}{subsubsection.1.6.7}%
-\contentsline {subsubsection}{\numberline {1.6.8}Ключевые метрики платформы}{74}{subsubsection.1.6.8}%
-\contentsline {section}{ЗАКЛЮЧЕНИЕ}{76}{table.caption.20}%
-\contentsline {section}{СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ}{80}{Item.69}%
-\contentsline {section}{СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ}{80}{Item.69}%
-\contentsline {section}{ПРИЛОЖЕНИЕ А. Структура каталогов проекта}{87}{Item.69}%
+\contentsline {subsubsection}{\numberline {1.4.5}Формулировка задачи в терминах вычислительной математики}{42}{subsubsection.1.4.5}%
+\contentsline {subsubsection}{\numberline {1.4.6}Обоснование выбранной математической модели}{43}{subsubsection.1.4.6}%
+\contentsline {subsubsection}{\numberline {1.4.7}Классификация задач расчёта балок}{44}{subsubsection.1.4.7}%
+\contentsline {subsection}{\numberline {1.5}Метод решения поставленной задачи}{45}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}Сравнение альтернативных методов расчёта}{45}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}Теория численного интегрирования методом трапеций}{48}{subsubsection.1.5.2}%
+\contentsline {subsubsection}{\numberline {1.5.3}Оценка сходимости алгоритма}{49}{subsubsection.1.5.3}%
+\contentsline {subsubsection}{\numberline {1.5.4}Алгоритм расчёта}{50}{subsubsection.1.5.4}%
+\contentsline {subsubsection}{\numberline {1.5.5}Архитектура программного решения}{51}{subsubsection.1.5.5}%
+\contentsline {subsubsection}{\numberline {1.5.6}Обоснование выбора технологий}{53}{subsubsection.1.5.6}%
+\contentsline {subsubsection}{\numberline {1.5.7}Визуализация}{55}{subsubsection.1.5.7}%
+\contentsline {subsubsection}{\numberline {1.5.8}Интеграция большой языковой модели (LLM)}{56}{subsubsection.1.5.8}%
+\contentsline {subsection}{\numberline {1.6}Результаты исследования}{59}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Реализованная платформа}{59}{subsubsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {1.6.2}Пошаговое решение}{64}{subsubsection.1.6.2}%
+\contentsline {subsubsection}{\numberline {1.6.3}AI-консультант на базе большой языковой модели}{65}{subsubsection.1.6.3}%
+\contentsline {subsubsection}{\numberline {1.6.4}Контекстные подсказки}{67}{subsubsection.1.6.4}%
+\contentsline {subsubsection}{\numberline {1.6.5}Экспорт и обмен}{67}{subsubsection.1.6.5}%
+\contentsline {subsubsection}{\numberline {1.6.6}Контрольные расчёты}{68}{subsubsection.1.6.6}%
+\contentsline {subsubsection}{\numberline {1.6.7}Производительность}{71}{subsubsection.1.6.7}%
+\contentsline {subsubsection}{\numberline {1.6.8}Ключевые метрики платформы}{72}{subsubsection.1.6.8}%
+\contentsline {section}{ЗАКЛЮЧЕНИЕ}{73}{table.caption.17}%
+\contentsline {section}{СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ}{76}{Item.64}%
+\contentsline {section}{СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ}{76}{Item.64}%
+\contentsline {section}{ПРИЛОЖЕНИЕ А. Структура каталогов проекта}{83}{Item.64}%

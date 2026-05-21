@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.4.9)  11 APR 2026 21:00
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.4.9)  19 MAY 2026 23:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1147,78 +1147,74 @@ Overfull \hbox (3.9711pt too wide) in paragraph at lines 90--90
 []|\TU/TimesNewRoman(0)/m/n/12 Интерактив.| 
  []
 
-[13] [14] [15]) (chapters/ch1_object.tex [16] [17] [18] [19] [20] [21])
-(chapters/ch2_cases.tex [22]
+[13] [14] [15]) (chapters/ch1_object.tex [16] [17] [18] [19] [20])
+(chapters/ch2_cases.tex [21]
 File: images/cantilever_scheme.png Graphic file (type bmp)
 <images/cantilever_scheme.png>
- [23] [24]
+ [22] [23]
 File: images/simply_supported_scheme.png Graphic file (type bmp)
 <images/simply_supported_scheme.png>
- [25]
+ [24] [25]
 File: images/overhang_scheme.png Graphic file (type bmp)
 <images/overhang_scheme.png>
  [26] [27] [28] [29]
-Overfull \hbox (9.03265pt too wide) in paragraph at lines 230--230
+Overfull \hbox (9.03265pt too wide) in paragraph at lines 206--206
 []|\TU/TimesNewRoman(0)/b/n/12 Параметр| 
  []
 
 
-Overfull \hbox (18.20844pt too wide) in paragraph at lines 230--230
+Overfull \hbox (18.20844pt too wide) in paragraph at lines 206--206
 []|\TU/TimesNewRoman(0)/m/n/12 Статическая
  []
 
 
-Overfull \hbox (11.00726pt too wide) in paragraph at lines 230--230
+Overfull \hbox (11.00726pt too wide) in paragraph at lines 206--206
 []|\TU/TimesNewRoman(0)/m/n/12 Граничные
  []
 
 
-Overfull \hbox (12.63617pt too wide) in paragraph at lines 230--230
+Overfull \hbox (12.63617pt too wide) in paragraph at lines 206--206
 []|\TU/TimesNewRoman(0)/m/n/12 Положение
  []
 
 
-Overfull \hbox (12.63617pt too wide) in paragraph at lines 230--230
+Overfull \hbox (12.63617pt too wide) in paragraph at lines 206--206
 []|\TU/TimesNewRoman(0)/m/n/12 Положение
  []
 
 
-Overfull \hbox (23.73383pt too wide) in paragraph at lines 230--230
+Overfull \hbox (23.73383pt too wide) in paragraph at lines 206--206
 []|\TU/TimesNewRoman(0)/m/n/12 Возможность
  []
 
-[30]) (chapters/ch3_scheme.tex [31] [32] [33] [34] [35] [36])
-(chapters/ch4_problem.tex
-Overfull \hbox (0.16019pt too wide) in paragraph at lines 153--4
+[30]) (chapters/ch3_scheme.tex [31] [32] [33] [34] [35]
+Overfull \hbox (0.16019pt too wide) in paragraph at lines 152--153
 []\TU/TimesNewRoman(0)/m/n/14.4 Принцип суперпозиции лежит в основе алгоритма п
 остроения эпюр ме-
  []
 
-[37] [38] [39] [40] [41] [42] [43] [44] [45]) (chapters/ch5_method.tex [46]
-[47] [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60])
-(chapters/ch6_results.tex [61]
+) (chapters/ch4_problem.tex [36] [37] [38] [39] [40] [41] [42] [43] [44])
+(chapters/ch5_method.tex [45] [46] [47] [48] [49] [50] [51] [52] [53] [54]
+[55] [56] [57] [58]) (chapters/ch6_results.tex [59]
 File: images/beam_scheme.png Graphic file (type bmp)
 <images/beam_scheme.png>
 File: images/diagrams_M_Q_N.png Graphic file (type bmp)
 <images/diagrams_M_Q_N.png>
- [62]
-File: images/verification_panel.png Graphic file (type bmp)
-<images/verification_panel.png>
- [63]
+ [60] [61]
 File: images/theory.png Graphic file (type bmp)
 <images/theory.png>
 File: images/scenarios.png Graphic file (type bmp)
 <images/scenarios.png>
- [64]
+ [62]
 File: images/trainer.png Graphic file (type bmp)
 <images/trainer.png>
- [65]
+ [63]
 File: images/step_by_step.png Graphic file (type bmp)
 <images/step_by_step.png>
- [66] [67] [68] [69] [70]
-[71] [72] [73] [74]) (chapters/conclusion.tex [75] [76] [77]) [78]
-(chapters/references.tex [79] [80] [81] [82] [83] [84] [85])
-(appendices/appendix_b.tex [86] [87]) [88]
+
+[64] [65] [66] [67] [68] [69] [70] [71]) (chapters/conclusion.tex [72] [73]
+[74]) (chapters/references.tex [75] [76] [77] [78] [79] [80] [81])
+(appendices/appendix_b.tex [82] [83]) [84]
 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (main.aux)
@@ -1227,15 +1223,15 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 270870461C9E538DEFF409BBE190EB1B;17566.
+(rerunfilecheck)             Checksum: D3213B52970EFCF391C9B44AEEAFC67B;16901.
  ) 
 Here is how much of TeX's memory you used:
- 29141 strings out of 402987
- 573081 string characters out of 5448732
- 1174108 words of memory out of 5000000
- 57349 multiletter control sequences out of 15000+600000
+ 29097 strings out of 402987
+ 572148 string characters out of 5448732
+ 1169329 words of memory out of 5000000
+ 57306 multiletter control sequences out of 15000+600000
  636322 words of font info for 117 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,16n,119p,1055b,2326s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,16n,119p,916b,2326s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (88 pages).
+Output written on main.pdf (84 pages).
