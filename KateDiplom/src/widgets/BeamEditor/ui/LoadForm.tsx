@@ -104,6 +104,24 @@ export function LoadForm({ loads, maxPosition, onAdd, onRemove, onUpdateLoad }: 
         </button>
       </div>
 
+      {/* Режим: редактировать выбранную или создать новую */}
+      {loads.length > 0 && (
+        <div className={`${styles.modeHint} ${isEditMode ? styles.modeHintEditing : ''}`}>
+          <button
+            type="button"
+            className={!isEditMode ? styles.modeBtnActive : styles.modeBtn}
+            onClick={() => setSelectedLoadId(null)}
+          >
+            + Новая нагрузка
+          </button>
+          <span className={styles.modeLabel}>
+            {isEditMode
+              ? 'Сейчас редактируется выбранная нагрузка. Чтобы выбрать другой тип, нажмите «Новая нагрузка».'
+              : 'Выберите тип нагрузки ниже или откройте существующую из списка.'}
+          </span>
+        </div>
+      )}
+
       {/* Тип нагрузки (в режиме редактирования показываем только текущий тип) */}
       <div className={styles.typeTabs}>
         {(['point', 'distributed', 'moment'] as Load['type'][]).map((t) => (
@@ -350,20 +368,6 @@ export function LoadForm({ loads, maxPosition, onAdd, onRemove, onUpdateLoad }: 
       <button className={styles.addBtn} onClick={handleAdd} type="button">
         + Добавить нагрузку
       </button>
-
-      {/* Режим: редактировать выбранную или новую */}
-      {loads.length > 0 && (
-        <div className={styles.modeHint}>
-          <button
-            type="button"
-            className={!isEditMode ? styles.modeBtnActive : styles.modeBtn}
-            onClick={() => setSelectedLoadId(null)}
-          >
-            Новая нагрузка
-          </button>
-          <span className={styles.modeLabel}>или выберите ниже для редактирования</span>
-        </div>
-      )}
 
       {/* Список нагрузок */}
       {loads.length > 0 && (

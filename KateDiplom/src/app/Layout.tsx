@@ -1,6 +1,15 @@
 import type { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
+import {
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { useTheme } from './providers/useTheme';
 import styles from './Layout.module.css';
 
@@ -8,8 +17,16 @@ interface Props {
   children: ReactNode;
 }
 
+const navItems = [
+  { to: '/calculator', label: 'Калькулятор' },
+  { to: '/theory', label: 'Теория' },
+  { to: '/scenarios', label: 'Сценарии' },
+  { to: '/trainer', label: 'Тренажер' },
+];
+
 export function Layout({ children }: Props) {
   const { theme, toggleTheme } = useTheme();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const isLight = theme === 'light';
 
   return (
@@ -20,39 +37,26 @@ export function Layout({ children }: Props) {
             SopromatLab
           </NavLink>
           <nav className={styles.nav}>
-            <NavLink
-              to="/calculator"
-              className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-              }
-            >
-              Калькулятор
-            </NavLink>
-            <NavLink
-              to="/theory"
-              className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-              }
-            >
-              Теория
-            </NavLink>
-            <NavLink
-              to="/scenarios"
-              className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-              }
-            >
-              Сценарии
-            </NavLink>
-            <NavLink
-              to="/trainer"
-              className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-              }
-            >
-              Тренажёр
-            </NavLink>
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </nav>
+          <button
+            className={styles.menuButton}
+            type="button"
+            onClick={onOpen}
+            aria-label="Открыть меню"
+          >
+            <HamburgerIcon boxSize={5} />
+          </button>
           <button
             className={styles.themeToggle}
             type="button"
@@ -65,6 +69,33 @@ export function Layout({ children }: Props) {
           </button>
         </div>
       </header>
+
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent bg="var(--color-bg-card)" color="var(--color-text)">
+          <DrawerCloseButton top="0.75rem" right="0.75rem" />
+          <DrawerHeader borderBottomWidth="1px" borderColor="var(--color-border)">
+            SopromatLab
+          </DrawerHeader>
+          <DrawerBody padding="1rem">
+            <nav className={styles.drawerNav}>
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `${styles.drawerNavLink} ${isActive ? styles.drawerNavLinkActive : ''}`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+
       <main className={styles.main}>{children}</main>
     </div>
   );

@@ -106,8 +106,8 @@ export function DiagramChart({
   const maxAbsIdx = values.reduce((b, v, i) => (Math.abs(v) > Math.abs(values[b]) ? i : b), 0);
 
   const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
-    const rect = svgRef.current!.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = ((e.clientX - rect.left) / rect.width) * SVG_WIDTH;
     const plotW = SVG_WIDTH - PADDING.left - PADDING.right;
     const t = Math.max(0, Math.min(1, (mouseX - PADDING.left) / plotW));
     const idx = Math.round(t * (xs.length - 1));
