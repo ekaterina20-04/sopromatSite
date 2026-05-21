@@ -1,18 +1,19 @@
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { ErrorBoundary } from './providers/ErrorBoundary';
+import { ThemeProvider } from './providers/ThemeProvider';
 import { AppRouter } from './Router';
 import './styles/global.css';
 
 const chakraTheme = extendTheme({
   config: { initialColorMode: 'dark', useSystemColorMode: false },
-  styles: { global: { body: { bg: 'transparent', color: 'white' } } },
+  styles: { global: { body: { bg: 'transparent', color: 'var(--color-text)' } } },
   components: {
     Tooltip: {
       baseStyle: {
-        bg: '#1e293b',
-        color: '#f8fafc',
-        border: '1px solid #334155',
+        bg: 'var(--color-bg-card)',
+        color: 'var(--color-text)',
+        border: '1px solid var(--color-border)',
         borderRadius: '8px',
         fontSize: '0.8rem',
         maxW: '260px',
@@ -26,11 +27,13 @@ const chakraTheme = extendTheme({
 export function App() {
   return (
     <ErrorBoundary>
-      <ChakraProvider theme={chakraTheme}>
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
-      </ChakraProvider>
+      <ThemeProvider>
+        <ChakraProvider theme={chakraTheme}>
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
+        </ChakraProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }
