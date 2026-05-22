@@ -10,20 +10,28 @@
 
 \vspace{1em}
 
-Кодовая база платформы организована по методологии Feature-Sliced Design. Ниже приведена полная структура каталогов с указанием назначения ключевых файлов.
+Кодовая база платформы организована по методологии Feature-Sliced Design. Ниже приведена актуальная структура каталогов с указанием назначения ключевых файлов и модулей.
 
 \vspace{1em}
 
 \begin{lstlisting}[basicstyle=\small\ttfamily, frame=none, numbers=none]
 src/
 |-- app/                    # Application shell
-|   |-- App.tsx             # Root component + routing
-|   |-- providers.tsx       # Chakra UI + Error Boundary
-|   |-- global.css          # Global styles
+|   |-- App.tsx             # ChakraProvider, ThemeProvider, Router
+|   |-- Layout.tsx          # Header, navigation, theme toggle
+|   |-- Layout.module.css   # Layout styles
+|   |-- Router.tsx          # React Router routes
+|   |-- providers/
+|   |   |-- ErrorBoundary.tsx
+|   |   |-- ThemeProvider.tsx
+|   |   |-- themeContext.ts
+|   |   |-- useTheme.ts
+|   |-- styles/
+|       |-- global.css      # CSS variables for dark/light themes
 |
 |-- pages/
 |   |-- calculator/         # Main calculator page
-|   |-- theory/             # Educational theory (9 sections)
+|   |-- theory/             # Educational theory (8 sections)
 |   |-- scenarios/          # Pre-built examples (5 tasks)
 |   |-- trainer/            # Random task generator
 |
@@ -44,13 +52,29 @@ src/
 |
 |-- widgets/
 |   |-- BeamEditor/         # Input panel
+|   |   |-- ui/
+|   |       |-- BeamTypeSelector.tsx
+|   |       |-- GeometryPanel.tsx
+|   |       |-- LoadForm.tsx
 |   |-- DiagramViewer/      # Output visualization
-|   |-- DiagramChart.tsx    # SVG diagram renderer
-|   |-- BeamScheme.tsx      # Beam scheme drawing
+|   |   |-- ui/
+|   |       |-- BeamScheme.tsx      # Beam scheme drawing
+|   |       |-- DiagramChart.tsx    # SVG diagram renderer
+|   |       |-- ReactionsPanel.tsx  # Support reactions
 |   |-- StepByStep/         # Step-by-step solution
 |   |-- ExportPanel/        # PDF export + Share URL
+|   |-- ChatAssistant/      # Contextual AI assistant
+|       |-- lib/
+|       |   |-- buildBeamContext.ts
+|       |   |-- types.ts
+|       |-- ui/
+|           |-- ChatAssistant.tsx
+|           |-- ChatWindow.tsx
+|           |-- ChatMessage.tsx
 |
 |-- shared/
+|   |-- config/
+|   |   |-- beamTypes.ts    # Beam type metadata
 |   |-- lib/
 |       |-- shareUrl.ts     # Base64 encode/decode
 |       |-- exportPdf.ts    # html2canvas + jsPDF
@@ -58,3 +82,15 @@ src/
 |-- main.tsx                # React entry point
 \end{lstlisting}
 
+\vspace{1em}
+
+Серверная часть используется только для AI-консультанта и вынесена в отдельный каталог:
+
+\begin{lstlisting}[basicstyle=\small\ttfamily, frame=none, numbers=none]
+backend/
+|-- src/
+|   |-- chat.ts             # /api/chat proxy to OpenRouter
+|-- package.json            # Backend dependencies and scripts
+|-- tsconfig.json           # TypeScript configuration
+|-- Dockerfile              # Container build for API proxy
+\end{lstlisting}
