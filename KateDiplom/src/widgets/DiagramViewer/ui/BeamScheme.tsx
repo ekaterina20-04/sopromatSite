@@ -198,8 +198,8 @@ export function BeamScheme({ config, result }: Props) {
               { length: numArrows },
               (_, i) => pxStart + ((pxEnd - pxStart) * (i + 0.5)) / numArrows
             );
-            const arrowY1 = isPositive ? BEAM_Y - BEAM_H / 2 : BEAM_Y - BEAM_H / 2 - qH;
-            const arrowY2 = isPositive ? BEAM_Y - BEAM_H / 2 - qH : BEAM_Y - BEAM_H / 2;
+            const arrowY1 = isPositive ? BEAM_Y - BEAM_H / 2 - qH : BEAM_Y - BEAM_H / 2;
+            const arrowY2 = isPositive ? BEAM_Y - BEAM_H / 2 : BEAM_Y - BEAM_H / 2 - qH;
             return (
               <Tooltip
                 key={load.id}
@@ -258,7 +258,7 @@ export function BeamScheme({ config, result }: Props) {
                     fontSize={10}
                     fill="#a78bfa"
                   >
-                    {load.value >= 0 ? '↻' : '↺'}
+                    {load.value >= 0 ? '↺' : '↻'}
                   </text>
                   <text
                     x={px}
